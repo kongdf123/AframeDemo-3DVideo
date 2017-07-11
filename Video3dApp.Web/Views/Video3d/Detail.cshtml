@@ -8,17 +8,38 @@
 <head>
 	<meta charset="utf-8">
 	<title>360-Video Preview</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<script src="~/Scripts/aframe-v0.6.0.js"></script>
+	<style>
+		#play-button {
+			position: fixed;
+			top: calc(50% - 1em);
+			left: calc(50% - 2em);
+			width: 4em;
+			height: 2em;
+			z-index: 10;
+		}
+	</style>
 </head>
 <body>
+	<button id="play-button">Play</button>
 	<a-scene>
 		<a-assets>
-			@*<video id="video" src="/Video3d/ReadVideo"
-				   autoplay loop crossorigin="anonymous"></video>*@
-			<video id="video" src="https://ucarecdn.com/fadab25d-0b3a-45f7-8ef5-85318e92a261/"
-				   autoplay loop crossorigin="anonymous"></video>
+			<video id="video" src="/Video3d/ReadVideo"
+				   autoplay loop webkit-playsinline crossorigin="anonymous"></video>
+			@*<video id="video" src="https://ucarecdn.com/fadab25d-0b3a-45f7-8ef5-85318e92a261/"
+				autoplay loop crossorigin="anonymous"></video>*@
 		</a-assets>
 		<a-videosphere src="#video" rotation="0 180 0"></a-videosphere>
 	</a-scene>
-	<script src="~/Scripts/aframe-master.js"></script>
+	<script>
+		var vid = document.getElementById('video');
+		console.log(vid);
+
+		document.getElementById('play-button').addEventListener("click", function (e) {
+			this.style.display = 'none';
+			vid.play();
+		}, false);
+	</script>
 </body>
 </html>

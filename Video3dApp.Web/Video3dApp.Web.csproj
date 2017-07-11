@@ -89,6 +89,8 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\aframe-master.js" />
     <Content Include="Scripts\aframe-master.min.js" />
+    <Content Include="Scripts\aframe-v0.6.0.js" />
+    <Content Include="Scripts\aframe-v0.6.0.min.js" />
     <Content Include="UploadFiles\VRBrandUSA2.mp4" />
     <Content Include="Web.config" />
   </ItemGroup>
