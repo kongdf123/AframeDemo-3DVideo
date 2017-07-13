@@ -14,6 +14,11 @@ namespace Video3dApp.Web
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 			routes.MapRoute(
+				name: "Video3d",
+				url: "Video3d/{action}.mp4",
+				defaults: new { controller = "Video3d", action = "ReadVideo", id = UrlParameter.Optional }
+			);
+			routes.MapRoute(
 				name: "Default",
 				url: "{controller}/{action}/{id}",
 				defaults: new { controller = "Video3d", action = "Detail", id = UrlParameter.Optional }

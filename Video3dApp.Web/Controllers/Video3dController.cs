@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Web;
 using System.Web.Mvc;
+using Video3dApp.Web.Filters;
 
 namespace Video3dApp.Controllers
 {
@@ -10,7 +12,13 @@ namespace Video3dApp.Controllers
 			return View();
 		}
 
-		[AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post | HttpVerbs.Options)]
+		public void CheckDownloadProgress() {			
+			if ( (string)Session["fileDownload"] == "true" ) {
+				Response.AppendCookie(new HttpCookie("fileDownload", "true") {Path = "/" });
+			}
+		}
+
+		[AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post | HttpVerbs.Options), FileDownload]
 		public void ReadVideo() {
 			var reqRange = Request.Headers["Range"];
 			string[] reqBlockRange = null;
@@ -24,10 +32,10 @@ namespace Video3dApp.Controllers
 			Response.AddHeader("access-control-allow-methods", "HEAD, GET, OPTIONS");
 			Response.AddHeader("access-control-allow-origin", "*");
 			Response.AddHeader("cache-control", "public, max-age=30726563");
-			Response.AddHeader("content-disposition", $"attachment;  filename=VRBrandUSA.mp4");
+			Response.AddHeader("content-disposition", $"attachment;  filename=VRBrandUSA1.mp4");
 			Response.ContentType = "video/mp4";
 
-			string fileName = Server.MapPath("/UploadFiles/VRBrandUSA2.mp4");
+			string fileName = Server.MapPath("/UploadFiles/VRBrandUSA1.mp4");
 
 			using ( var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite) )
 			using (var reader=new BinaryReader(stream)) {
